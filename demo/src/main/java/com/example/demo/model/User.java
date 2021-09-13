@@ -28,13 +28,13 @@ public class User {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	private String name;
+	private String username;
 	private Integer role_id;
 	private String email;
 	private String password;
 	
     public User(String name, Integer role_id, String email, String password) {
-        this.setName(name);
+        this.setUsername(name);
         this.setRole_id(role_id);
         this.setEmail(email);
         this.setPassword(password);
