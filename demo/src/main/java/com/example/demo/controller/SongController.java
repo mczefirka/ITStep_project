@@ -24,7 +24,7 @@ public class SongController {
 	@Autowired
 	private SongRepository songRepo;
 	
-    @RequestMapping(value = { "/songList" }, method = RequestMethod.GET)
+    @GetMapping("/songList")
     public String viewSongList(Model model) {
  
         model.addAttribute("songs", songRepo.findAll());
@@ -33,9 +33,12 @@ public class SongController {
     }
     
     @GetMapping("/song/{id}")
-    public Song show(@PathVariable String id){
+    public String show(@PathVariable String id, Model model){
         int songId = Integer.parseInt(id);
-        return songRepo.getById(songId);
+        
+        model.addAttribute("song", songRepo.getById(songId));
+        
+        return "song";
     }
     
 //    @PutMapping("/song_edit/{id}")

@@ -1,6 +1,5 @@
 package com.example.demo.model;
 
-import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -33,8 +32,8 @@ public class User {
 	private String email;
 	private String password;
 	
-    public User(String name, Integer role_id, String email, String password) {
-        this.setUsername(name);
+    public User(String username, Integer role_id, String email, String password) {
+        this.setUsername(username);
         this.setRole_id(role_id);
         this.setEmail(email);
         this.setPassword(password);

@@ -19,9 +19,9 @@ public class Role {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	private String name;
+	private String type;
 	
-	public Role(String name, Integer role_id, String email, String password) {
-        this.setName(name);
+    public Role(String type) {
+        this.setType(type);
     }
 }
