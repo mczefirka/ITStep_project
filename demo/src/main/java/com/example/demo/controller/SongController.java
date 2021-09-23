@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.dao.RoleRepository;
 import com.example.demo.dao.SongRepository;
 import com.example.demo.model.Blog;
 import com.example.demo.model.Song;
@@ -23,6 +24,9 @@ public class SongController {
 	
 	@Autowired
 	private SongRepository songRepo;
+	
+	@Autowired
+	private RoleRepository roleRepo;
 	
     @GetMapping("/songList")
     public String viewSongList(Model model) {
@@ -39,6 +43,14 @@ public class SongController {
         model.addAttribute("song", songRepo.getById(songId));
         
         return "song";
+    }
+    
+    @GetMapping("/roleList")
+    public String viewRoleList(Model model){
+        
+        model.addAttribute("roles", roleRepo.findAll());
+        
+        return "roleList";
     }
     
 //    @PutMapping("/song_edit/{id}")

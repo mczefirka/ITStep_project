@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.JoinColumn;
@@ -28,13 +29,13 @@ public class User {
 	private Integer id;
 	
 	private String username;
-	private Integer role_id;
+	
 	private String email;
 	private String password;
 	
-    public User(String username, Integer role_id, String email, String password) {
+    public User(String username, String email, String password) {
         this.setUsername(username);
-        this.setRole_id(role_id);
+//        this.setRole_id(role_id);
         this.setEmail(email);
         this.setPassword(password);
     }
@@ -44,6 +45,10 @@ public class User {
              joinColumns = { @JoinColumn(name = "user_id") }, 
              inverseJoinColumns = { @JoinColumn(name = "role_id") })
 	private Set<Role> roles = new HashSet<Role>();
+    
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "role_id", nullable = false)
+//	private Role role;
 	
     @Transient
     private String passwordConfirm;

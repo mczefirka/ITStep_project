@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.example.demo.dao.RoleRepository;
 import com.example.demo.dao.SongRepository;
 import com.example.demo.dao.UserRepository;
 import com.example.demo.model.Song;
@@ -27,6 +30,9 @@ public class UserController {
 	@Autowired
 	public UserRepository userRepo;
 	
+	@Autowired
+	private RoleRepository roleRepo;
+	
     @Autowired
     private UserService userService;
     
@@ -36,6 +42,7 @@ public class UserController {
     @Autowired
     private UserValidator userValidator;
     
+    
     @GetMapping("/registration")
     public String registration(Model model) {
         if (securityService.isAuthenticated()) {
@@ -43,6 +50,8 @@ public class UserController {
         }
 
         model.addAttribute("userForm", new User());
+        
+        model.addAttribute("roles", roleRepo.findAll());
 
         return "registration";
     }
@@ -78,9 +87,28 @@ public class UserController {
     }
 
     @GetMapping({"/", "/welcome"})
-    public String welcome(Model model) {
+    public String welcome(Model model, @ModelAttribute("userForm") User userForm) {
+    	model.addAttribute("loggedinuser", getPrincipal());
         return "welcome";
     }
+    
+    @GetMapping({"/userList"})
+    public String viewUserList(Model model) {
+    	model.addAttribute("users", userRepo.findAll());
+        return "userList";
+    }
+    
+	private String getPrincipal(){
+		String userName = null;
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		if (principal instanceof UserDetails) {
+			userName = ((UserDetails)principal).getUsername();
+		} else {
+			userName = principal.toString();
+		}
+		return userName;
+	}
     
     
     //
