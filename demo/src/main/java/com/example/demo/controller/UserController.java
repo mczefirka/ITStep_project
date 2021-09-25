@@ -96,7 +96,7 @@ public class UserController {
     public String viewUserList(Model model) {
     	model.addAttribute("users", userRepo.findAll());
         return "userList";
-    }
+    }//
     
 	private String getPrincipal(){
 		String userName = null;
