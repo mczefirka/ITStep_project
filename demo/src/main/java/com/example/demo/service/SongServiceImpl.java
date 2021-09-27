@@ -16,6 +16,11 @@ public class SongServiceImpl implements SongService{
     	return songRepository.findById(id);
     }
 
+	@Override
+	public void saveSong(Song song) {
+		songRepository.save(song);
+	}
+
 }
 
 //@Service("SongService")
