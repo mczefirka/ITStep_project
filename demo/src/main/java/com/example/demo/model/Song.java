@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.time.Year;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -25,24 +26,28 @@ import lombok.NoArgsConstructor;
 public class Song {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-
-	private String song_name;
-	private String genre_name;
+	@Column(name="song_name")
+	private String songName;
+	@Column(name="genre_name")	
+	private String genreName;
 	private Integer rating;
-	private Integer download_quantity;
-	private Timestamp db_date;
-	private Year song_date;
+	@Column(name="download_quantity")	
+	private Integer downloadQuantity;
+	@Column(name="db_date")		
+	private Timestamp dbDate;
+	@Column(name="song_date")		
+	private Timestamp songDate;
 	
-    public Song(String song_name, String genre_name, Integer rating, Integer download_quantity, Timestamp db_date, Year song_date) {
-        this.setSong_name(song_name);
-        this.setGenre_name(genre_name);
+    public Song(String songName, String genreName, Integer rating, Integer downloadQuantity, Timestamp dbDate, Timestamp songDate) {
+        this.setSongName(songName);
+        this.setGenreName(genreName);
         this.setRating(rating);
-        this.setDownload_quantity(download_quantity);
-        this.setDb_date(db_date);
-        this.setSong_date(song_date);
+        this.setDownloadQuantity(downloadQuantity);
+        this.setDbDate(dbDate);
+        this.setSongDate(songDate);
     }
     
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "name", nullable = false)
-	private Genre genre;
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "name", nullable = false)
+//	private Genre genre;
 }

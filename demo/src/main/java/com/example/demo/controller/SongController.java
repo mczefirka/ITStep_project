@@ -11,6 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -81,6 +82,16 @@ public class SongController {
  
         return "redirect:/welcome";
     }
+    
+	@DeleteMapping("/deleteSong/{id}")
+	public String deleteSong(@PathVariable String id) {
+		
+		int songId = Integer.parseInt(id);
+		songService.deleteSong(songId);
+
+		return "redirect:/songList";
+		
+	}    
     
 //    @PutMapping("/song_edit/{id}")
 //    public Song update(@PathVariable String id, @RequestBody Map<String, String> body) {

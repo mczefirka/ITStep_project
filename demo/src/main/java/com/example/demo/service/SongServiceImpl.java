@@ -21,6 +21,11 @@ public class SongServiceImpl implements SongService{
 		songRepository.save(song);
 	}
 
+	@Override
+	public void deleteSong(int id) {
+		songRepository.deleteById(id);
+	}
+
 }
 
 //@Service("SongService")
