@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -96,6 +97,16 @@ public class UserController {
     public String viewUserList(Model model) {
     	model.addAttribute("users", userRepo.findAll());
         return "userList";
+    }
+    
+    @GetMapping("/favSongsList")
+    public String viewFavSongsList(@PathVariable Integer id, Model model) {
+ 
+//        model.addAttribute("favSongsList", favSongsRepo.findById(id));
+        
+        model.addAttribute("songs"); //?
+        
+        return "favoriteSongs";
     }
     
 	private String getPrincipal(){

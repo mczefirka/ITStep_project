@@ -45,6 +45,12 @@ public class User {
              joinColumns = { @JoinColumn(name = "user_id") }, 
              inverseJoinColumns = { @JoinColumn(name = "role_id") })
 	private Set<Role> roles = new HashSet<Role>();
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "favorite_songs", 
+             joinColumns = { @JoinColumn(name = "user_id_playlist") }, 
+             inverseJoinColumns = { @JoinColumn(name = "fav_song_id") })
+	private Set<Song> songs = new HashSet<Song>();
     
 //	@ManyToOne(fetch = FetchType.LAZY)
 //	@JoinColumn(name = "role_id", nullable = false)

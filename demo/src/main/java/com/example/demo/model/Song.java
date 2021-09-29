@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -28,8 +30,8 @@ public class Song {
 	private Integer id;
 	@Column(name="song_name")
 	private String songName;
-	@Column(name="genre_name")	
-	private String genreName;
+//	@Column(name="genre_name")	
+//	private String genreName;
 	private Integer rating;
 	@Column(name="download_quantity")	
 	private Integer downloadQuantity;
@@ -38,16 +40,21 @@ public class Song {
 	@Column(name="song_date")		
 	private Timestamp songDate;
 	
-    public Song(String songName, String genreName, Integer rating, Integer downloadQuantity, Timestamp dbDate, Timestamp songDate) {
+    public Song(String songName, Integer rating, Integer downloadQuantity, Timestamp dbDate, Timestamp songDate) {
         this.setSongName(songName);
-        this.setGenreName(genreName);
+//        this.setGenreName(genreName);
         this.setRating(rating);
         this.setDownloadQuantity(downloadQuantity);
         this.setDbDate(dbDate);
         this.setSongDate(songDate);
     }
     
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "name", nullable = false)
-//	private Genre genre;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "genre_name", nullable = false)
+	private Genre genre;
+	
+//	@JoinTable(name = "genres", joinColumns = { @JoinColumn(name = "name") })
+	
+//	@ManyToMany(fetch = FetchType.LAZY)
+//	@JoinTable(name = "users_roles", joinColumns = { @JoinColumn(name = "user_id") })
 }

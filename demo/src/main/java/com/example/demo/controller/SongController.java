@@ -83,7 +83,7 @@ public class SongController {
         return "redirect:/welcome";
     }
     
-	@DeleteMapping("/deleteSong/{id}")
+	@GetMapping("/deleteSong?id={id}")//"/deleteSong/{id}"
 	public String deleteSong(@PathVariable String id) {
 		
 		int songId = Integer.parseInt(id);
@@ -92,6 +92,7 @@ public class SongController {
 		return "redirect:/songList";
 		
 	}    
+	
     
 //    @PutMapping("/song_edit/{id}")
 //    public Song update(@PathVariable String id, @RequestBody Map<String, String> body) {
