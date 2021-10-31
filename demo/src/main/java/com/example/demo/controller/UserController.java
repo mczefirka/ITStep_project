@@ -88,8 +88,7 @@ public class UserController {
     }
 
     @GetMapping({"/", "/welcome"})
-    public String welcome(Model model, @ModelAttribute("userForm") User userForm) {
-    	model.addAttribute("loggedinuser", getPrincipal());
+    public String welcome(Model model) {
         return "welcome";
     }
     
@@ -109,17 +108,17 @@ public class UserController {
         return "favoriteSongs";
     }
     
-	private String getPrincipal(){
-		String userName = null;
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-		if (principal instanceof UserDetails) {
-			userName = ((UserDetails)principal).getUsername();
-		} else {
-			userName = principal.toString();
-		}
-		return userName;
-	}
+//	private String getPrincipal(){
+//		String userName = null;
+//		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//
+//		if (principal instanceof UserDetails) {
+//			userName = ((UserDetails)principal).getUsername();
+//		} else {
+//			userName = principal.toString();
+//		}
+//		return userName;
+//	}
     
     
     //

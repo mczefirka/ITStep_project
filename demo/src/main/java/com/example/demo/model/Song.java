@@ -38,9 +38,9 @@ public class Song {
 	@Column(name="db_date")		
 	private Timestamp dbDate;
 	@Column(name="song_date")		
-	private Timestamp songDate;
+	private Date songDate;
 	
-    public Song(String songName, Integer rating, Integer downloadQuantity, Timestamp dbDate, Timestamp songDate) {
+    public Song(String songName, Integer rating, Integer downloadQuantity, Timestamp dbDate, Date songDate) {
         this.setSongName(songName);
 //        this.setGenreName(genreName);
         this.setRating(rating);

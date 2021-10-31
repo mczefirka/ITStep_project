@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.Temporal;
@@ -45,21 +46,28 @@ public class SongController {
 	private GenreRepository genreRepo;	
 	
     @GetMapping("/songList")
-    public String viewSongList(Model model) {
- 
-        model.addAttribute("songs", songRepo.findAll());
- 
-        return "songList";
+    public String viewSongList(Model model, String keyword) {
+
+		if (keyword != null) {
+			model.addAttribute("songs", songRepo.findByIdContainingOrSongNameContaining(keyword, keyword));
+		} else {
+			model.addAttribute("songs", songRepo.findAll());
+		}
+		return "songList";
+    	
+//        model.addAttribute("songs", songRepo.findAll());
+// 
+//        return "songList";
     }
     
-    @GetMapping({"/song/{id}", "/song?id={id}"})
-    public String show(@PathVariable String id, Model model){
-        int songId = Integer.parseInt(id);
-        
-        model.addAttribute("song", songRepo.getById(songId));
-        
-        return "song";
-    }
+//    @GetMapping("/song/{id}")	//	"/song?id={id}"
+//    public String show(@PathVariable String id, Model model){
+//        int songId = Integer.parseInt(id);
+//        
+//        model.addAttribute("song", songRepo.getById(songId));
+//        
+//        return "song";
+//    }
     
 	@GetMapping("/addSong")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -83,7 +91,7 @@ public class SongController {
         return "redirect:/welcome";
     }
     
-	@GetMapping("/deleteSong?id={id}")//"/deleteSong/{id}"
+	@GetMapping("/deleteSong/{id}")//"/deleteSong/{id}"		"/deleteSong?id={id}"		"/deleteSong?{id}"
 	public String deleteSong(@PathVariable String id) {
 		
 		int songId = Integer.parseInt(id);
